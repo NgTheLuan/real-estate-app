@@ -1,3 +1,4 @@
+import GlobalProvider from '@/libs/global-provider'
 import { useFonts } from 'expo-font'
 import { SplashScreen, Stack } from 'expo-router'
 import { useEffect } from 'react'
@@ -23,5 +24,9 @@ export default function RootLayout() {
 		return null
 	}
 
-	return <Stack />
+	return (
+		<GlobalProvider>
+			<Stack screenOptions={{ headerShown: false }} />
+		</GlobalProvider>
+	)
 }

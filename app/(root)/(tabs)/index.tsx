@@ -1,20 +1,25 @@
-import { Link } from 'expo-router'
-import { Text, View } from 'react-native'
+import icons from '@/constants/icons'
+import { useGlobalContext } from '@/libs/global-provider'
+import { Image, Text, View } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function Index() {
+	const { user } = useGlobalContext()
+
 	return (
-		<View
-			style={{
-				flex: 1,
-				justifyContent: 'center',
-				alignItems: 'center',
-			}}
-		>
-			<Text className="text-bold text-3xl my-10 font-rubik">Welcome to ReState</Text>
-			<Link href="/sign-in">Sign In</Link>
-			<Link href="/explore">Explore</Link>
-			<Link href="/profile">Profile</Link>
-			<Link href="/properties/1">Properties</Link>
-		</View>
+		<SafeAreaView className="h-full bg-white">
+			<View className="px-5">
+				<View className="flex flex-row items-center justify-between mt-5">
+					<View className="flex flex-row items-center">
+						<Image source={{ uri: user?.avatar }} className="size-12 rounded-full" />
+						<View className="flex flex-col items-start ml-2 justify-center">
+							<Text className="text-xs font-rubik text-black-100">Good morning</Text>
+							<Text className="text-base font-rubikMedium text-black-300">{user?.name}</Text>
+						</View>
+					</View>
+					<Image source={icons.bell} className="size-6" />
+				</View>
+			</View>
+		</SafeAreaView>
 	)
 }
